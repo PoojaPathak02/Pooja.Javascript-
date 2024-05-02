@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown</title>
+    
+    <style>
+*
+{
+      margin: 0%;
+    padding: 0%;
+}
+body
+{
+    background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("https://cdn.pixabay.com/photo/2016/06/12/20/27/macro-1452987_1280.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+.box
+{
+    height: 100px;
+    width: 50%;
+    background-color: black;
+    margin: auto;
+    margin-top: 42%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+
+}
+.timer
+{
+    display: flex;
+    justify-content: start;
+    font-size: 60px;
+    color: whitesmoke;
+    margin-top: 15px;
+}
+button
+{
+    border-radius: 50px;
+    padding: 5px;
+    background-color: cadetblue;
+    color: whitesmoke;
+}
+h1
+{
+    font-style: italic;
+    color: whitesmoke;
+}
+img{
+    height: 100px;
+    width: 60%;
+}
+
+    </style>
+</head>
+<body>
+    <div class="box">
+    <button onClick="start()">Start Countdown</button>
+    <button onClick="stop()">Stop Countdown</button> 
+    <div class="timer">
+        <div id="minutes">00</div>
+        <span>:</span>
+        <div id="seconds">00</div>
+    </div>
+    <img src="" alt="">
+</div>
+</body>
+<script>
+    let time = 60;
+    let min = 1;
+    let Stop
+    function start()
+    {
+        Stop = setInterval(()=>{
+            time--;
+            if(time<=0)
+            {
+                clearInterval(Stop);
+            }
+            document.getElementById("seconds").innerText = time;
+            
+        },1000);
+    }
+
+    function stop() 
+    {
+        clearInterval(Stop);
+         document.getElementById("seconds").innerText = "Countdown Stopped!";
+         document.getElementById("minutes").innerText = "";
+    }
+
+    let arr=[" https://images.unsplash.com/photo-1552508744-1696d4464960?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ,"https://images.unsplash.com/photo-1494178270175-e96de2971df9?q=80&w=1980&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "https://images.unsplash.com/photo-1632010752286-94f8b0f7be68?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
+    let index = 0;
+    setInterval(()=>{
+        index=(index+1)%arr.length; //0+1=1%3=1
+                                    //1+1=2%3=2
+                                    //2+1=3%3=0
+        document.querySelector("img").src=arr[index]
+    },3000)
+
+</script>
+</html>
