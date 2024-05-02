@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+     <!-- Css -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+     <!-- JS -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+</head>
+<body style="background-color: black;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+        <div class="container">
+            <!-- Logo -->
+            <a href="" class="navbar-brand text-dark">PORSCHE</a>
+
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#car">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Menu -->
+            <div class="collapse navbar-collapse" id="car">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item "><a href="" class="nav-link text-primary">Home</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="" class="nav-link ">Services</a></li>
+                    <li class="nav-item"><a href="" class="nav-link">Contact</a></li>
+                    <li class="nav-item me-3"><a href="" class="nav-link">More</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <img src="" alt="" height="600px" width="auto" style="margin-left: 18%;">
+</body>
+<script>
+    let arr =["https://images.unsplash.com/photo-1634673970798-a15ae56f6c65?q=80&w=1856&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+"https://images.unsplash.com/photo-1615839399574-c842427f9862?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+"https://images.unsplash.com/photo-1632154939368-1a92207d8af3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
+    let currentIndex = 0;
+    setInterval(()=>{
+        currentIndex=(currentIndex+1)%arr.length; //0+1=1%3=1
+                                                  //1+2=2%3=2
+                                                  //2+1=3%3=0
+        document.querySelector("img").src=arr[currentIndex]
+    },2000)
+</script>
+</html>
