@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORONA API</title>
+</head>
+<style>
+    body
+    {
+        background-image: url('https://cdn.pixabay.com/photo/2024/05/02/10/27/virus-8734358_1280.jpg');
+        height: 3300px;
+        width: 100px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+<body>
+    <!-- <div style="color: whitesmoke;border: 1px solid lightsalmon; width: 400px; text-align: center; background-color: transparent;">
+        <h2>Location:Andaman and Nicobar Islands</h2>
+        <h3>ConfirmedCasesIndian:10039</h3>
+        <h3>ConfirmedCasesForeign:0</h3>
+        <h3>Discharged:9907</h3>
+        <h3>Deaths:129</h3>
+        <h3>TotalConfirmed:10039</h3>
+    </div> -->
+    <div id="container" style="display: grid; grid-template-columns: repeat(3,1fr); gap: 15px;margin-left: 62px; margin-top: 30px;"></div>
+</body>
+<script>
+    function FetchData()
+    {
+        fetch("https://api.rootnet.in/covid19-in/stats/latest")
+        .then((res)=>res.json())
+        .then((data)=>listOfInfo(data.data.regional))
+        .catch((err)=>console.log(err))
+    }
+    FetchData()
+
+    function listOfInfo(data)
+    {
+        // console.log(data)
+        const store=data.map((el)=>singleInfo(el.loc,el.confirmedCasesIndian,el.confirmedCasesForeign,el.discharged,el.deaths,el.totalConfirmed))
+        document.getElementById("container").innerHTML=store.join("")
+    }
+
+    function singleInfo(loc,confirmedCasesIndian,confirmedCasesForeign,discharged,deaths,totalConfirmed)
+    {
+        let card =`
+        <div style="color:white  ;border: 1px solid lightsalmon; width: 400px; text-align: center; background-color: transparent;">
+        <h2>Location: ${loc}</h2>
+        <h3>ConfirmedCasesIndian: ${confirmedCasesIndian}</h3>
+        <h3>ConfirmedCasesForeign: ${confirmedCasesForeign}</h3>
+        <h3>Discharged: ${discharged}</h3>
+        <h3>Deaths: ${deaths}</h3>
+        <h3>TotalConfirmed: ${totalConfirmed}</h3>
+    </div>`
+         
+        return card
+    }
+</script>
+</html>
