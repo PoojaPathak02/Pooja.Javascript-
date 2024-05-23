@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body
+        {
+            background-image: url("https://images.unsplash.com/photo-1531824475211-72594993ce2a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        }
+      #container
+        {
+            grid-template-columns: repeat(3,1fr);
+            display: grid;
+        }
+        .box
+        {
+           margin: auto;
+           width: 50%;
+            border: 2px solid black;
+            padding: 20px 30px;
+            margin: 10px auto;
+            background-color: #D4D5CF;
+        }
+        img
+        {
+            width: 50%  ;
+            border-radius: 50px;
+        }
+        .text
+         {
+            align-items: center;
+            text-align: center;
+            color: brown;
+            justify-content: center;
+        }
+       
+
+    </style>
+</head>
+<body>
+    <h1 class="text">WEATHER API</h1>
+   <div id="container"></div>
+    
+</body>
+    <script>
+        function Fetchdata(){
+            fetch("https://reqres.in/api/users?page=2")   
+                .then((res) => res.json())
+                .then((data) => cardlist(data))
+                .catch((err) => console.log(err))
+    
+        }
+        Fetchdata()
+    
+        function cardlist(data){
+            const store=data.data.map((el)=>singlecard(el.id,el.email,el.first_name,el.last_name,el.avatar))
+            document.getElementById("container").innerHTML=store.join('');
+    
+        }
+        
+        function singlecard(id,email,first_name,last_name,avatar){
+           let card=`
+           <div class="box">
+            
+            <h3>email:${email}</h3>
+            <h3>first_name:${first_name}</h3>
+            <h3>last_name":${last_name}</h3>
+            <img src="${avatar}" alt="Avatar">
+            </div>   
+           `
+           return card
+        }
+    
+    </script>
+</html>
