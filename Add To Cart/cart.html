@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="mainSection"></div>
+</body>
+<script>
+    function Fetchdata()
+{
+    fetch("http://localhost:3000/cart")
+    .then((res)=>res.json())
+    .then((data)=>{
+      CardList(data)
+      productData=data
+    }
+  )
+    .catch((err)=>console.log(err))
+}
+Fetchdata()
+
+function CardList(data)
+{
+    // console.log(data)
+    const store=data.map((el)=>SingleCard(el.id,el.image,el.title,el.founder,el.category,el.price))
+    document.getElementById("mainSection").innerHTML=store.join("")
+}
+
+function SingleCard(id,image,title,founder,category,price)
+{
+    let Card =`
+    <a href="description.html?title=${encodeURIComponent(title)}&image=${encodeURIComponent(image)}&founder=${encodeURIComponent(founder)}&category=${encodeURIComponent(category)}&price=${encodeURIComponent(price)}">
+            <div class="card" data-id=${id}>
+              <div class="card-img">
+                <img src=${image} alt="Pitch">
+              </div>
+              <div class="card-body">
+                <h4 class="card-title">Title:${title}</h4>
+                <p class="card-founder">Founder:${founder}</p>
+                <p class="card-category">Category:${category}</p>
+                <p class="card-price">Price:${price}</p>
+                
+                <button data-id=${id} class="card-button">Remove</button>
+              </div>
+              </div></a>
+              `
+
+        return Card
+
+}
+//REMOVE FROM ADD TO CART
+document.addEventListener("click",(e)=>{
+  if(e.target.classList.contains("card-button")){
+  deleteData(e.target.dataset.id);}
+ })
+
+ function deleteData(id)
+ {
+  fetch(`http://localhost:3000/cart/${id}`,{
+    method:'DELETE'
+  })
+  .then((res)=>res.json)
+  .then((data)=>{
+    alert("Removed from Cart")
+    console.log(data)
+  })
+  .catch((err)=>console.log(err))
+ }
+
+</script>
+</html>
